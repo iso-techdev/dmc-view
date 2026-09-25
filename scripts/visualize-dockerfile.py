@@ -2,7 +2,6 @@
 import argparse
 import re
 import sys
-import typing as t
 from pathlib import Path
 
 
@@ -119,7 +118,7 @@ def generate_rst(dockerfile_path):
     return rst
 
 
-def parse_cli_args() -> tuple[Path, t.Optional[str]]:
+def parse_cli_args() -> tuple[Path, str | None]:
     parser = argparse.ArgumentParser(description="Process Dockerfile paths.")
 
     parser.add_argument(

@@ -2,16 +2,13 @@
 
 import json
 import platform
-import ssl
 import sys
 from typing import Any
 
-import PySide6
 import matplotlib
+import PySide6
 
 from . import __version__ as dmcview_version
-
-
 
 
 def _implementation()-> dict[str, str]:
@@ -64,8 +61,8 @@ def info() -> dict[str, Any]:
     PySide6_info = {"version": PySide6.__version__}
     matplotlib_info = {"version": matplotlib.__version__}
 
-    
-   
+
+
     return {
         "platform": platform_info,
         "implementation": implementation_info,

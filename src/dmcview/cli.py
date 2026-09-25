@@ -4,13 +4,14 @@ from argparse import ArgumentParser, Namespace
 
 from PySide6.QtWidgets import QApplication, QHBoxLayout, QWidget
 
-from dmcview import __version__
-from dmcview import __author__
-from dmcview import __description__
-from dmcview import __license__
-from dmcview import __title__
-from dmcview import __url__
-
+from dmcview import (
+    __author__,
+    __description__,
+    __license__,
+    __title__,
+    __url__,
+    __version__,
+)
 from dmcview._help import bug_reporting
 from dmcview.acceleration import Accelaration3D
 from dmcview.compass import Compass

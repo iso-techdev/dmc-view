@@ -22,7 +22,7 @@ JobName = t.NewType("JobName", str)
 # JobNeedsType = t.Union[JobName, t.List[JobName], None]
 # JobNeeds = t.NewType('JobNeeds', JobNeedsType)
 # # OPT 1
-JobNeeds = t.Union[JobName, list[JobName], None]
+JobNeeds = t.Union[JobName, list[JobName], None] # noqa: UP007
 
 
 ParsedYaml = dict[str, t.Any]
@@ -32,7 +32,7 @@ JobsNeedsValue = list[JobName]
 
 
 # Parse the GitHub Actions YAML file
-def parse_actions_config(filename: t.Union[str, Path]) -> t.Union[ParsedYaml, None]:
+def parse_actions_config(filename: str | Path) -> ParsedYaml | None:
     with open(filename) as stream:
         try:
             return yaml.safe_load(stream)
@@ -78,7 +78,7 @@ def generate_mermaid(job_dependencies: dict[str, list[str]]) -> str:
     return mermaid_code
 
 
-def mermaid_from_yaml(filename: t.Union[str, Path], format: str = "md") -> str:
+def mermaid_from_yaml(filename: str | Path, format: str = "md") -> str:
     config: ParsedYaml = parse_actions_config(filename)
     if config is None:
         print(f"[ERROR] Could not parse YAML file: {filename}")

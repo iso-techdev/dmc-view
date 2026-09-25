@@ -11,7 +11,7 @@ ExceptionFactory = t.Callable[[str, str, str], Exception]
 ClientCallback = t.Callable[[str, str], tuple]
 
 MatchConverter = t.Callable[[t.Match], tuple]
-MatchData = t.Union[
+MatchData = t.Union[ # noqa: UP007
     tuple[t.Callable[[t.Match], tuple], str, list[t.Any]],
     tuple[t.Callable[[t.Match], tuple], str],
     tuple[t.Callable[[t.Match], tuple]],
