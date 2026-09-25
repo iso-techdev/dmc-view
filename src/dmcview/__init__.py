@@ -6,5 +6,11 @@
   view the Digital Magnetic Data. Each device manufacturer has its own unique serial port Id; so
   there is no need to configure. It is just plug and play approach with different internal adapter
 """
-
-__version__ = "0.3.3"
+from .__version__ import (
+    __author__,
+    __description__,
+    __license__,
+    __title__,
+    __url__,
+    __version__,
+)

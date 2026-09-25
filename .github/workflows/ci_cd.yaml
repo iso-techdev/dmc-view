@@ -19,10 +19,16 @@ on:
       - "*"
 
 env:
+  #########################################################
   ### Job MATRIX ###
+  #########################################################
   # Python 3.12 is in bugfix mode, same as 3.11 -> can start supporting 3.13 later 
-  UBUNTU_PY313_STRATEGY: "{\"platform\":[\"ubuntu-latest\"], \"python-version\":[\"${{ vars.PYTHON_VERSION }}\"]}"
-  TOX_VERSION: ${{ vars.TOX_VERSION }}
+  UBUNTU_PY313_STRATEGY: "{\"platform\":[\"ubuntu-latest\"], \"python-version\":[\"3.13\"]}"
+  
+  #########################################################
+  ### TOX VERSION ###
+  #########################################################
+  TOX_VERSION: 3.28 
  
   #########################################################
   ##### JOB ON/OFF SWITCHES - Top/1st level overrides #####
@@ -143,7 +149,7 @@ jobs:
         uses: actions/setup-python@v5.6.0
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m pip install --upgrade pip && python -m pip install tox==${{ env.TOX_VERSION }} tox-gh-actions
+      - run: python -m pip install --upgrade pip && python -m pip install tox==${{env.TOX_VERSION}} tox-gh-actions
 
       - uses: actions/checkout@v4.2.2
 

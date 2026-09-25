@@ -1,6 +1,6 @@
 | **Digital Magnetic Compass View**
 
-.. image:: https://raw.githubusercontent.com/Issamricin/dmc-view/master/media/logo.png
+.. image:: https://raw.githubusercontent.com/iso-techdev/dmc-view/master/media/logo.png
    :alt: Digital Magnatic Compass View 
    :height: 200
 
@@ -16,10 +16,10 @@ COMMUNITY VERSION
 
 
 |
-| **Code:** https://github.com/Issamricin/dmc-view
+| **Code:** https://github.com/iso-techdev/dmc-view
 | **Docs:** https://dmc-view.readthedocs.io/en/latest/
 | **PyPI:** https://pypi.org/project/dmc-view/
-| **CI:** https://github.com/Issamricin/dmc-view/actions/
+| **CI:** https://github.com/iso-techdev/dmc-view/actions/
   
 |
 |
@@ -36,24 +36,24 @@ Features
    b. View animation to reflect real DMC device in 2D
    c. View acceleration in 3D
 2. Tested against Linux(ubuntu-latest) `platforms` and `python` 3.13
-3. `TODO <https://github.com/Issamricin/dmc-view/blob/master/TODO.rst>`_
+3. `TODO <https://github.com/iso-techdev/dmc-view/blob/master/TODO.rst>`_
 
 Technical Debt
 ==============
-`Technical Debt <https://github.com/Issamricin/dmc-view/blob/master/TECHNICALDEBT.rst>`_
+`Technical Debt <https://github.com/iso-techdev/dmc-view/blob/master/TECHNICALDEBT.rst>`_
 
 Change Log
 ==========
-`Change Log <https://github.com/Issamricin/dmc-view/blob/master/CHANGELOG.rst>`_.
+`Change Log <https://github.com/iso-techdev/dmc-view/blob/master/CHANGELOG.rst>`_.
 
 
 Developer Guide
 ===============
-`Development <https://github.com/Issamricin/dmc-view/blob/master/docs/source/contents/development.rst>`_
+`Development <https://github.com/iso-techdev/dmc-view/blob/master/docs/source/contents/development.rst>`_
 
 Quickstart
 ==========
-`Usage <https://github.com/Issamricin/dmc-view/blob/master/docs/source/contents/usage.rst>`_
+`Usage <https://github.com/iso-techdev/dmc-view/blob/master/docs/source/contents/usage.rst>`_
 
 
 License
@@ -64,7 +64,7 @@ License
 
 .. LINKS
 
-.. _GNU Affero General Public License v3.0: https://github.com/Issamricin/dmc-view/blob/master/LICENSE
+.. _GNU Affero General Public License v3.0: https://github.com/iso-techdev/dmc-view/blob/master/LICENSE
 
  
 
@@ -73,9 +73,9 @@ License
 .. Build Status
 .. Github Actions: Test Workflow Status for specific branch <branch>
 
-.. |build| image:: https://github.com/Issamricin/dmc-view/actions/workflows/ci_cd.yaml/badge.svg
+.. |build| image:: https://github.com/iso-techdev/dmc-view/actions/workflows/ci_cd.yaml/badge.svg
     :alt: GitHub Workflow Status (branch)
-    :target: https://github.com/Issamricin/dmc-view/actions/
+    :target: https://github.com/iso-techdev/dmc-view/actions/
 
 
 .. Documentation
@@ -103,16 +103,16 @@ License
 
 .. Github Releases & Tags
 
-.. |commits_since_specific_tag_on_main| image:: https://img.shields.io/github/commits-since/Issamricin/dmc-view/v0.0.1/master?color=blue&logo=github
+.. |commits_since_specific_tag_on_main| image:: https://img.shields.io/github/commits-since/iso-techdev/dmc-view/v0.0.1/master?color=blue&logo=github
     :alt: GitHub commits since tagged version (branch)
-    :target: https://github.com/Issamricin/dmc-view/compare/v0.0.1..master
+    :target: https://github.com/iso-techdev/dmc-view/compare/v0.0.1..master
 
 .. LICENSE (eg AGPL, MIT)
 .. Github License
 
 .. |gh-lic| image:: https://img.shields.io/badge/license-GNU_Affero-orange
     :alt: GitHub
-    :target: https://github.com/Issamricin/dmc-view/blob/master/LICENSE
+    :target: https://github.com/iso-techdev/dmc-view/blob/master/LICENSE
 
 
 .. Ruff linter for Fast Python Linting
@@ -124,15 +124,15 @@ License
 
 .. |codacy| image:: https://app.codacy.com/project/badge/Grade/9d883627ff974ff9a6721700c2909ac1
     :alt: Codacy
-    :target: https://app.codacy.com/gh/Issamricin/dmc-view/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
+    :target: https://app.codacy.com/gh/iso-techdev/dmc-view/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
 
-.. |coveralls| image:: https://coveralls.io/repos/github/Issamricin/dmc-view/badge.svg?branch=master
+.. |coveralls| image:: https://coveralls.io/repos/github/iso-techdev/dmc-view/badge.svg?branch=master
     :alt: Coveralls
-    :target: https://coveralls.io/github/Issamricin/dmc-view?branch=master
+    :target: https://coveralls.io/github/iso-techdev/dmc-view?branch=master
 
 .. Local Image as link
 
-.. |dmc_gif| image:: https://raw.githubusercontent.com/Issamricin/dmc-view/master/media/simulator.gif
+.. |dmc_gif| image:: https://raw.githubusercontent.com/iso-techdev/dmc-view/master/media/simulator.gif
    :alt: Demo Preview
    :width: 800
    :height: 391

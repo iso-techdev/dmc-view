@@ -30,6 +30,7 @@ pydoer-graphs/
 *.lock
 # VSC local env
 venv
+.venv
 # poetry pin-deps generated file 
 reqs.txt
 # poetry .readthedocs.yaml 

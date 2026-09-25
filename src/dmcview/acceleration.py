@@ -17,7 +17,7 @@ class Accelaration3D(FigureCanvas):
 
 
     """
-    def __init__(self, figure: Figure = None) -> None:
+    def __init__(self, figure: Figure | None = None) -> None:
         super().__init__(figure)
 
         self.target_x = 0.0

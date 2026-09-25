@@ -15,9 +15,9 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at [https://github.com/Issamricin/dmc-view/issues](https://github.com/Issamricin/dmc-view/issues).
+Report bugs at [https://github.com/iso-techdev/dmc-view/issues](https://github.com/iso-techdev/dmc-view/issues).
 
-Stambling upon a Bug means encountering different behaviour than the expected/advertised one. When you are reporting a bug, please include the following infromation by filling in [the template](https://github.com/Issamricin/dmc-view/blob/develop/.github/ISSUE_TEMPLATE/bug_report.md).
+Stambling upon a Bug means encountering different behaviour than the expected/advertised one. When you are reporting a bug, please include the following infromation by filling in [the template](https://github.com/iso-techdev/dmc-view/blob/develop/.github/ISSUE_TEMPLATE/bug_report.md).
 
 * Your operating system name and version.
 * Any details about your local setup that might be helpful in troubleshooting.
@@ -52,7 +52,7 @@ You can open it in your browser at <http://127.0.0.1:8000> !
 
 ### Submit Feedback
 
-The best way to send feedback is to file an issue at [https://github.com/Issamricin/dmc-view/issues](https://github.com/Issamricin/dmc-view/issues).
+The best way to send feedback is to file an issue at [https://github.com/iso-techdev/dmc-view/issues](https://github.com/iso-techdev/dmc-view/issues).
 
 If you are proposing a feature:
 
@@ -68,7 +68,7 @@ Here's how to set up `dmc-view` for local development.
 1. Clone your fork locally:
 
  ```bash
- git clone git@github.com:Issamricin/dmc-view.git
+ git clone git@github.com:iso-techdev/dmc-view.git
  ```
 
 1. Install your local copy into a virtualenv. Assuming you have virtualenv installed, this is how you set up your fork for local development:
@@ -119,6 +119,42 @@ You report will be placed to `htmlcov` directory. Please do not include this dir
 1. Submit a pull request through the GitHub website.
 
 ## Contributor Guidelines
+
+### CI/CD check 
+below are the command to use to make sure your CI/CD is green
+```bash
+# static dependency check
+ tox -v -s false -e pin-deps
+
+#Do Type Checking
+tox -e type -v -s false
+
+# Test Suite Against Wheel
+tox -e wheel-test -s false
+
+# Combine Coverage (dev, sdist, wheel) & make Reports
+tox -e coverage --sitepackages -v -s false
+
+# Ruff check 
+tox -e check -v -s false
+
+# Static type Checking Dependencies
+tox -s false -e pin-deps 
+
+# Test suite 
+ tox -v -s false | tee test_output.log
+
+```
+
+8. Commit your changes and push your branch to GitHub:
+
+```bash
+git add .
+git commit . -m "Your detailed description of your changes."
+git push origin name-of-your-bugfix-or-feature
+```
+
+9. Submit a pull request through the GitHub website.
 
 ### Pull Request Guidelines
 
@@ -223,7 +259,7 @@ For other issues: encourage friendly discussion, moderate debate, offer your tho
 
 ### Process: Roadmap
 
-The roadmap(issues) located [here](https://github.com/Issamricin/dmc-view/issues)
+The roadmap(issues) located [here](https://github.com/iso-techdev/dmc-view/issues)
 
 Due dates are flexible.
 

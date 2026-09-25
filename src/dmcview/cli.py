@@ -5,6 +5,13 @@ from argparse import ArgumentParser, Namespace
 from PySide6.QtWidgets import QApplication, QHBoxLayout, QWidget
 
 from dmcview import __version__
+from dmcview import __author__
+from dmcview import __description__
+from dmcview import __license__
+from dmcview import __title__
+from dmcview import __url__
+
+from dmcview._help import bug_reporting
 from dmcview.acceleration import Accelaration3D
 from dmcview.compass import Compass
 from dmcview.simulator import start_simulator
@@ -100,6 +107,7 @@ def main() -> None:
         >>> dmcview -s Y
     """
 
+    # https://docs.python.org/3/howto/argparse.html
     parser = ArgumentParser(
         prog="dmcview",
         usage="dmcview -a 45.5 -d 5.6 -b 30.35 -e 15.23 -ac 14.21 12.3 13.5  \n       dmcview -s Y",
@@ -154,9 +162,39 @@ def main() -> None:
         default=None,
         metavar="[x,y,z]",
     )
-    parser.add_argument("--version", action="version", version=f"dmcview {__version__}")
+    parser.add_argument("--version", action="version", version=f"dmcview {__version__}") # this is build in parser to display the version of the package
+    parser.add_argument("--author", action="store_true", help="Display author information")
+    parser.add_argument("--report-bug", action="store_true", help="Library detail information to report a bug")
+    parser.add_argument("--description", action="store_true", help="Display description of the package")
+    parser.add_argument("--license", action="store_true", help="Display license information")
+    parser.add_argument("--title", action="store_true", help="Display title of the package")
+    parser.add_argument("--url", action="store_true", help="Display read the docs url of the package")
 
     args: Namespace = parser.parse_args()
+
+    if args.author:
+        print(f"Author: {__author__}")
+        return
+
+    if args.report_bug:
+        bug_reporting()
+        return
+
+    if args.description:
+        print(f"Description: {__description__}")
+        return
+
+    if args.license:
+        print(f"License: {__license__}")
+        return
+
+    if args.title:
+        print(f"Title: {__title__}")
+        return
+
+    if args.url:
+        print(f"URL: {__url__}")
+        return
 
     simulation: str = args.s
     print(simulation)

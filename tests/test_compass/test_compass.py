@@ -37,7 +37,7 @@ def test_update_angle_and_declination(compass):
 
 def test_receive_acceleration_updates_values(compass):
     compass.receive_acceleration(1.0, 2.0, 3.0)
-    assert (compass.x, compass.y, compass.z) == (1.0, 2.0, 3.0)
+    assert (compass.acc_x, compass.acc_y, compass.acc_z) == (1.0, 2.0, 3.0)
 
 def test_rotation_and_elevation(compass):
     compass.set_rotation(45)

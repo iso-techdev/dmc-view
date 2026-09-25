@@ -37,12 +37,12 @@ class Compass(QWidget):
         self.rotation = 0.0
 
         # acceleration vectors
-        self.x = 0.0
-        self.y = 0.0
-        self.z = 0.0
+        self.acc_x = 0.0
+        self.acc_y = 0.0
+        self.acc_z = 0.0
 
         self.signal_connected = (
-            False  # So the first time the signal tries to discconnect it wont be able
+            False  # So the first time the signal tries to disconnect it wont be able
         )
 
         self.start_animation_timer()
@@ -72,7 +72,7 @@ class Compass(QWidget):
         """
 
         self.static_pixmap = QPixmap(self.size())
-        self.static_pixmap.fill(Qt.transparent)
+        self.static_pixmap.fill(Qt.GlobalColor.transparent)
 
         painter = QPainter(self.static_pixmap)
         pen = QPen(Qt.PenStyle.SolidLine)
@@ -123,7 +123,7 @@ class Compass(QWidget):
         font_size = max(12, self.width() // 80)
         line_spacing = font_size
 
-        painter.setPen(QPen(Qt.black))
+        painter.setPen(QPen(Qt.GlobalColor.black))
         painter.setFont(QFont("Arial", font_size))
         text_x = center.x() + radius + 47  # reduce the number to prevent capped text
         text_y = center.y() - radius
@@ -149,12 +149,12 @@ class Compass(QWidget):
         painter.drawText(rotation_pos, f"Bank: {round(self.rotation,2)} °")
         painter.drawText(inclination_pos, f"Elevation: {round(self.elevation,2)} °")
         painter.drawText(acceleration_pos, "Acceleration:")
-        painter.drawText(acceleration_vec_pos, f"{self.x}, {self.y}, {self.z}")
+        painter.drawText(acceleration_vec_pos, f"{self.acc_x}, {self.acc_y}, {self.acc_z}")
 
     def receive_acceleration(self, x: float, y: float, z: float) -> None:
-        self.x = x
-        self.y = y
-        self.z = z
+        self.acc_x = x
+        self.acc_y = y
+        self.acc_z = z
         self.update()
 
     def draw_cardinal_points(self, painter: QPainter, center: QPointF, radius: int) -> None:
@@ -168,8 +168,8 @@ class Compass(QWidget):
             center: Center point (QPointF) of the compass.
             radius: Radius of the compass circle.
         """
-        painter.setPen(QPen(Qt.black, 2))
-        font = QFont("Arial", 14, QFont.Bold)
+        painter.setPen(QPen(Qt.GlobalColor.black, 2))
+        font = QFont("Arial", 14, QFont.Weight.Bold)
         painter.setFont(font)
 
         direction = {"N": 0, "E": 90, "S": 180, "W": 270}
@@ -196,7 +196,7 @@ class Compass(QWidget):
     def draw_lines(self, painter: QPainter, center: QPointF, radius: int) -> None:
         """ This method is for the inside lines around the circle from the inside. """
 
-        painter.setPen(QPen(Qt.black, 2))
+        painter.setPen(QPen(Qt.GlobalColor.black, 2))
 
         painter.drawLine(
             QPointF(center.x() - radius, center.y()), QPointF(center.x() + radius, center.y())
@@ -230,22 +230,22 @@ class Compass(QWidget):
 
         """
 
-        painter.setBrush(QBrush(Qt.red))
-        painter.setPen(QPen(Qt.red, 2))
+        painter.setBrush(QBrush(Qt.GlobalColor.red))
+        painter.setPen(QPen(Qt.GlobalColor.red, 2))
 
         triangle_size = 20
         arrow_distance = radius * 0.8
         angle_rad = -math.radians(self.elevation)
 
-        triangle_x = center.x() + arrow_distance * math.cos(angle_rad)
-        triangle_y = center.y() + arrow_distance * math.sin(angle_rad)
+        triangle_x: float = center.x() + arrow_distance * math.cos(angle_rad)
+        triangle_y: float = center.y() + arrow_distance * math.sin(angle_rad)
 
-        pen = QPen(Qt.red, 1, Qt.SolidLine)
-        pen2 = QPen(QColor("DarkBlue"), 1, Qt.DashLine)
+        pen = QPen(Qt.GlobalColor.red, 1, Qt.PenStyle.SolidLine)
+        pen2 = QPen(QColor("DarkBlue"), 1, Qt.PenStyle.DashLine)
 
         painter.setPen(pen)
 
-        painter.drawLine(center.x(), center.y(), triangle_x, triangle_y)
+        painter.drawLine(int(center.x()), int(center.y()), int(triangle_x), int(triangle_y))
 
         floating_triangle = QPolygonF(
             [
@@ -262,7 +262,7 @@ class Compass(QWidget):
         rotated_triangle = transform.map(floating_triangle)
         painter.drawPolygon(rotated_triangle)
 
-        pen = QPen(Qt.black, 1, Qt.DashLine)
+        pen = QPen(Qt.GlobalColor.black, 1, Qt.PenStyle.DashLine)
         painter.setPen(pen)
 
         arc2_radius = radius - 120
@@ -343,7 +343,7 @@ class Compass(QWidget):
 
         painter.resetTransform()
 
-        pen = QPen(dark_red, 1, Qt.DashLine)
+        pen = QPen(dark_red, 1, Qt.PenStyle.DashLine)
         painter.setPen(pen)
 
         arc_radius = radius + 25
@@ -419,7 +419,7 @@ class Compass(QWidget):
 
         painter.resetTransform()
 
-        pen = QPen(dark_green, 1, Qt.DashLine)
+        pen = QPen(dark_green, 1, Qt.PenStyle.DashLine)
         painter.setPen(pen)
 
         arc_radius = radius - 20
@@ -522,7 +522,7 @@ class Compass(QWidget):
             radius (int): The radius of the compass circle, determines the size and position of the drawn elements.
 
         """
-        painter.setPen(QPen(Qt.red, 2))
+        painter.setPen(QPen(Qt.GlobalColor.red, 2))
 
         line_length = radius * 2
         transform = QTransform()
@@ -531,11 +531,11 @@ class Compass(QWidget):
 
         line_start = QPointF(-line_length / 2, 0)
         line_end = QPointF(line_length / 2, 0)
-        transformed_line = transform.map(QPolygonF([line_start, line_end]))
+        transformed_line: QPolygonF = transform.map(QPolygonF([line_start, line_end]))
 
-        painter.drawLine(transformed_line[0], transformed_line[1])
+        painter.drawLine(transformed_line.first(), transformed_line.last())
 
-        pen = QPen(Qt.black, 1, Qt.DashLine)
+        pen = QPen(Qt.GlobalColor.black, 1, Qt.PenStyle.DashLine)
         painter.setPen(pen)
 
         arc_radius = radius - 40  # -40 so it is not touching the circle

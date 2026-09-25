@@ -42,7 +42,7 @@ def get_templated_vars():
             author_name='Iso',
             year='2024',
             version='0.0.1',
-            github_username='Issamricin',
+            github_username='iso-techdev',
             repo_name='dmc-view',
         ),
     )

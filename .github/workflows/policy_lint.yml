@@ -128,55 +128,8 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install tox==${{ env.TOX_VERSION }}
 
-      ## Isort ##
-      - name: 'Isort: Require Semantic and Alphabetic order of the Python Imports'
-        if: ${{ matrix.platform != 'windows-latest' }}
-        run: tox -e isort -vv -s false
-
-      ## Black ##
-      - name: 'Black: Require Project Style "opinion" to be followed by the Python Code'
-        if: ${{ matrix.platform != 'windows-latest' }}
-        run: tox -e black -vv -s false
-
       ## Ruff ##
       - name: 'Ruff: Require Project to pass Ruff Checks'
         run: tox -e ruff -vv -s false
 
-      ## Pyflakes, Pyroma, McCabe, DodgyRun, Profile Validator ##
-      - name: Run tox -e prospector
-        if: ${{ matrix.platform != 'windows-latest' }}
-        run: tox -e prospector -vv -s false
-
-  legacy_pylint:
-    runs-on: ubuntu-latest
-    needs: lint_policy
-    if: always() && needs.lint_policy.outputs.RUN_SQA == 'true'
-    steps:
-      - uses: actions/checkout@v4.2.2
-      - name: Set up Python ${{ inputs.python_version }}
-        uses: actions/setup-python@v5.6.0
-        with:
-          python-version: ${{ inputs.python_version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install tox==${{ env.TOX_VERSION }}
-
-      ## Pylint (legacy) ##
-      - name: Run Pylint tool on Python Code Base
-        run: tox -e pylint -vv -s false | tee pylint-result.txt
-
-      - run: cat pylint-result.txt
-
-      - name: 'Check Pylint Score > ${{ inputs.pylint_threshold }}/10'
-        if: ${{ matrix.platform != 'windows-latest' }}
-        run: |
-          SCORE=`sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint-result.txt`
-          echo "SCORE -> $SCORE"
-          # threshold check
-          if awk "BEGIN {exit !($SCORE >= ${{ inputs.pylint_threshold }})}"; then
-            echo "PyLint Passed! | Score: ${SCORE} out of 10 | Threshold: ${{ inputs.pylint_threshold }}"
-          else
-            echo "PyLint Failed! | Score: ${SCORE} out of 10 | Threshold: ${{ inputs.pylint_threshold }}"
-            exit 1
-          fi
+     

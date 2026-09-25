@@ -12,7 +12,7 @@ Developer Guide
 
 .. code-block:: shell
 
-    git clone git@github.com:Issamricin/dmc-view.git
+    git clone git@github.com:iso-techdevv/dmc-view.git
     cd dmc-view
 
 | Make the project in edit mode  
@@ -30,7 +30,7 @@ Steps to test the publish on pypi see workflow files for publish on pypi test se
 
 .. code-block:: shell
 
-   git clone git@github.com:Issamricin/dmc-view.git
+   git clone git@github.com:iso-techdev/dmc-view.git
    python -m venv .venv 
 
 

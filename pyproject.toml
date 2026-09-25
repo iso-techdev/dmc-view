@@ -7,26 +7,26 @@ build-backend = "poetry.core.masonry.api"
 [project]
 name = "dmc-view"
 version = "0.3.3"
-description = "Digital Magnatic Compass View"
+description = "Digital Magnetic Compass View"
 authors = [
    {name="Iso"}, 
    {name="Alan"}
 ]
 maintainers = [{name="Iso"}, {name="Alan"}] # must be an object
-license = "AGPL-3.0-only"
+license = {text = "AGPL-3.0-only"}
 readme = {file = "README.rst", content-type = "text/x-rst"}
 
-homepage = "https://github.com/Issamricin/dmc-view"
-repository = "https://github.com/Issamricin/dmc-view"
+homepage = "https://github.com/iso-techdev/dmc-view"
+repository = "https://github.com/iso-techdev/dmc-view"
 documentation = "https://dmc-view.readthedocs.io/"
 
 keywords = [
-    "digital magnatic view", "dmc",
+    "digital magnetic view", "dmc",
 ]
 
-requires-python = "<3.14,>=3.9"
+requires-python = ">=3.13"
 
-# Troves classifer see https://pypi.org/classifiers/
+# Troves classifier see https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Manufacturing",
@@ -48,20 +48,19 @@ classifiers = [
 
 
 # PyPi url links, that appear in 'Project Links' section
-urls."Bug Tracker" = "https://github.com/Issamricin/dmc-view/issues"
-urls."CI: Github Actions" = "https://github.com/Issamricin/dmc-view/actions"
+urls."Bug Tracker" = "https://github.com/iso-techdev/dmc-view/issues"
+urls."CI: Github Actions" = "https://github.com/iso-techdev/dmc-view/actions"
 urls.Documentation = "https://dmc-view.readthedocs.io/"
-urls."Source Code" = "https://github.com/Issamricin/dmc-view"
-urls.Changelog = "https://github.com/Issamricin/dmc-view/blob/master/CHANGELOG.rst"
-urls."Code of Conduct" = "https://github.com/Issamricin/dmc-view/blob/master/CONTRIBUTING.md"
+urls."Source Code" = "https://github.com/iso-techdev/dmc-view"
+urls.Changelog = "https://github.com/iso-techdev/dmc-view/blob/master/CHANGELOG.rst"
+urls."Code of Conduct" = "https://github.com/iso-techdev/dmc-view/blob/master/CONTRIBUTING.md"
 
 
 
 ### Dependency Constraints, aka Requirements ###
 # see https://python-poetry.org/docs/dependency-specification/#multiple-constraints-project
 dependencies = [
-  "pyside6 (>=6.6.1); python_version >= '3.8' and python_version <= '3.12'",
-  "pyside6 (<=6.9.1); python_version >= '3.9' and python_version <= '3.13'",
+  "pyside6 (<=6.11.2); python_version <'3.15' and python_version >= '3.10'", # check this https://pypi.org/project/PySide6/  to the right menu "Requires" 
   "matplotlib (>=3.10.1); python_version>='3.10' and python_version <='3.13'" # see https://github.com/matplotlib/matplotlib/blob/v3.10.1/pyproject.toml
 ]
 
@@ -74,8 +73,6 @@ test = [
   "pytest-cov (>=6); python_version >='3.9' and python_version <='3.13'",
   "pytest-mock (>=3.14.0); python_version >='3.9' and python_version <='3.14'",
   "pytest-qt (>=4.5.0); python_version >='3.9' and python_version <='3.13'",
-  "pyside6 (>=6.9.1)",
-  "matplotlib",
 
 ]
 docs =[
@@ -137,32 +134,15 @@ dmcview = 'dmcview.cli:main'
 # CONFIG PLACE
 ##############
 
-# see https://black.readthedocs.io/en/stable/  code format with max line 95
-[tool.black]
-line-length = 95
-include = '\.pyi?$'
-extend-exclude = '''
-'''
-
-# see https://pycqa.github.io/isort/index.html arrange the import in right order 
-[tool.isort]
-profile = 'black'
-
-# see https://bandit.readthedocs.io/en/latest/  check for security volubility
-#  Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-#  Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
-[tool.bandit]
-tests = []
-skips = [
-    "B101", # This plugin test checks for the use of the Python assert keyword. https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html
-    "B311"  # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html
-]
-
-# RUFF covers the above so repeat is done again in one place
-# Linting and formatting with Ruff
-# see https://docs.astral.sh/ruff/configuration/
+# RUFF is a fast Python linter, written in Rust. 
+#It can be used as a replacement for Flake8, Pyflakes, pycodestyle, and other linters. 
+#It also includes some additional checks and features that are not available in those tools.
+# https://docs.astral.sh/ruff/configuration/
+# $ ruff check
 [tool.ruff]
-#target-version = "py312"
+target-version = "py310" 
+src = ["src/dmcview", "tests"]
+exclude = ["docs/", "scripts"]
 
 [tool.ruff.lint]
 select = [
@@ -183,7 +163,74 @@ ignore = [
 ]
 
 
-# see scripts/parse_version.py 
-# we need to update in toml file above  and below also
-[tool.software-release]
-version_variable = "src/dmcview/__init__.py:__version__"
+[tool.ruff.lint.isort]
+known-first-party = ["dmcview"]
+
+[tool.ruff.format]
+# Use black-compatible formatting
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+
+#*********************************************************************
+# mypy configuration moved from mypy.ini to pyproject.toml
+# config file doc:https://mypy.readthedocs.io/en/stable/config_file.html
+# $ mypy ./src/mainpackage
+#**********************************************************************
+[tool.mypy]
+# Global options:
+warn_return_any = true
+warn_unused_configs = true
+
+# mypy per-module options:
+[[tool.mypy.overrides]]
+module = "dmcview.*"
+disallow_untyped_defs = true
+
+
+#*********************************************************************
+# Pytest configuration moved from pytest.ini to pyproject.toml
+# config file doc:https://docs.pytest.org/en/stable/reference/customize.html
+# QT fixture see https://pytest-qt.readthedocs.io/en/latest/intro.html
+#**********************************************************************#
+[tool.pytest]
+minversion = "9.0"
+addopts = ["--strict-markers"]
+pythonpath=["src"]
+testpaths = ["tests"]
+#required_plugins=["pytest-qt"]
+
+
+#*********************************************************************
+# Test Coverage configuration moved from .coveragerc to pyproject.toml
+# config file doc:https://coverage.readthedocs.io/en/7.15.4/config.html
+#**********************************************************************
+# $ coverage run -m pytest
+[tool.coverage.run]
+source = ["dmcview"]
+parallel = true
+# branch is the if else statement 
+branch = true
+
+[tool.coverage.report]
+fail_under=20 # threshold for test coverage, if below this number the test will fail
+skip_covered = false
+show_missing = true
+precision = 2
+omit = [    
+    "tests/*",
+    "*/__init__.py"
+]
+
+exclude_lines = [
+    "raise NotImplementedError",
+    "raise NotImplemented"
+]
+ignore_errors = false
+
+
+[tool.coverage.html]
+directory = "coverage_html_report"
