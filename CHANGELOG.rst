@@ -2,9 +2,22 @@
 Changelog
 =========
 
+==================
+0.3.4 (2026-09-28)
+==================
 
+| This patch improves the ci/cd.
+
+Improved
+--------
+
+- Simplified and improved the ci/cd by removing unnecessary jobs.
+- Added all the different job's ecosystem into tox.ini file as one stop shop.
+
+
+==================
 0.3.3 (2025-08-11)
-=======================================
+==================
 
 | This patch improve the workflow of the project.
 
@@ -13,8 +26,9 @@ Added
 - Full automation has been achieved for the software life cycle.
 
 
+==================
 0.3.2 (2025-05-01)
-=======================================
+==================
 
 | This patch release improves tox.
 
@@ -24,10 +38,11 @@ Improved
 - Things that were not needed are removed.
 
 
+==================
 0.3.1 (2025-04-24)
-=======================================
+==================
 
-| This release fixs the bugs and issues faced in the previous version.
+| This release fixes the bugs and issues faced in the previous version.
 | The dmcview is now executable from the command line.
 
 Added
@@ -40,8 +55,9 @@ Fixed
 - Dmcview is now executable from the command line. 
 
 
+==================
 0.3.0 (2025-04-13)
-=======================================
+==================
 
 | This release brings the new 3D acceleration support to the **dmcview** Python Package.
 
@@ -68,8 +84,9 @@ Fixed
 - Removed duplicated and broken badges that show in PyPI and github.
 
 
+==================
 0.0.1 (2024-08-04)
-=======================================
+==================
 
 | This is the first ever release of the **dmcview** Python Package.
 | The package is open source and is part of the **DMC View** Project.
