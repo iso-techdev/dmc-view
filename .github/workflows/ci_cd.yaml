@@ -143,26 +143,26 @@ jobs:
       matrix: ${{fromJSON(needs.set_github_outputs.outputs.matrix)}}
     env:
       WHEELS_PIP_DIR: "wheels-pip" # see tox.ini  env  DIST_DIR = wheels-pip
-    steps:
+    steps:      
+      - uses: actions/checkout@v4.2.2
       - run: echo "Platform -> ${{ matrix.platform }} , Python -> ${{ matrix.python-version }}"
+
+      - name: Install Qt dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libgl1 libxkbcommon-x11-0
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5.6.0
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install --upgrade pip && python -m pip install tox==${{env.TOX_VERSION}} tox-gh-actions
 
-      - uses: actions/checkout@v4.2.2
-
       - name: Pin 'Static Type Checking' Dependencies
         run: tox -v -s false -e pin-deps  #  -s , --skip-missing-interpreters V -fail tests for missing interpreters: {config,true,false} choice (default: config)
 
       - name: Do Type Checking
         run: tox -e type -v -s false  # do not skip missing interpreters don't install (config default)
-      
-      - name: Install Qt dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libegl1 libgl1 libxkbcommon-x11-0
 
       ###### TEST SUITE RUN against Edit and Sdist ######
       - name: Build and Test 'Edit' and 'Sdist' & Build Wheel(s)
@@ -222,6 +222,7 @@ jobs:
 
       ## UPLOAD CI ARTIFACTS - Coverage Reports ##
       - name: "Upload Test Coverage as Artifacts"
+        if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4.6.0
         with:
           name: all_coverage_raw
@@ -242,7 +243,8 @@ jobs:
           tox -e check -v -s false
 
       ## UPLOAD CI ARTIFACTS - Distro Build(s), 1 sdist and 1 or more wheels ##
-      - name: Upload Source & Wheel distributions as Artefacts
+      - name: Upload Source & Wheel distributions as Artifacts
+        if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4.6.0
         with:
           name: dist-${{ matrix.platform }}-${{ matrix.python-version }}
